@@ -12,15 +12,13 @@ const backgroundBuffer = document.createElement('canvas');
 backgroundBuffer.width = tileSize * 40; //40 objects
 backgroundBuffer.height = tileSize * 40;
 
+document.gameScore = 0;
 //load all images
 const graphics = new GraphicsFactory();
 const tileFactory = TileFactory.getInstance();
 const tileHandler = TileHandler.getInstance();
 function loadGraphics(main) {
     graphics.loadAllGraphics(main);
-    // setTimeout(() => {
-    //     main();
-    // }, 2000);
 }
 const player = Player.getInstance();
 function loadObjects(gameMap) {
@@ -89,6 +87,7 @@ function redraw(){
 }
 
 function updateLogic(){
+    document.gameScore += 1;
     player.update();
     tileHandler.tiles.filter(t => t.name === "woodBridge").forEach(t => {
         t.update();

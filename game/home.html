@@ -4,8 +4,42 @@
     <meta charset="UTF-8">
     <title>My game</title>
     <script type="module" src="./js/main.js"></script>
+    <script>
+        function loadScore() {
+            const score = document.gameScore;
+            document.getElementById("gameScore").innerText = score;
+            document.getElementById("sideBarForm").submit();
+        }
+    </script>
+    <style>
+        #game-content{
+            display: flex;
+            flex-direction: row;
+        }
+        .sidenav {
+            width: 100%;
+            background-color:yellowgreen;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sidenav input {
+            align-self: flex-end;
+            margin: 15px;
+        }
+        .sidenav p:hover {
+            color: #f1f1f1;
+        }
+
+    </style>
 </head>
 <body>
-    <canvas id="screen" width="1600" height="1600"></canvas>
+    <div id ="game-content">
+        <canvas id="screen" width="1600" height="1600"></canvas>
+        <form id = "sideBarForm" class="sidenav" action ="/dashboard">
+            <input id="gameScore" type = "hidden"/>
+            <input type="button" class="btn btn-primary btn-block" onclick="loadScore()" value ="Go back to dash board"/>
+        </form>
+    </div>
 </body>
 </html>
