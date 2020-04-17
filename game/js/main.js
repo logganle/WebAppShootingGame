@@ -7,10 +7,9 @@ import TileHandler from "./tiles/TileHandler.js"
 
 const canvas = document.getElementById('screen');
 const ctx = canvas.getContext('2d');
-
+const sideBar = document.getElementById('sideBarForm');
 const backgroundBuffer = document.createElement('canvas');
-backgroundBuffer.width = tileSize * 40; //40 objects
-backgroundBuffer.height = tileSize * 40;
+
 
 document.gameScore = 0;
 //load all images
@@ -21,11 +20,15 @@ function loadGraphics(main) {
     graphics.loadAllGraphics(main);
 }
 const player = Player.getInstance();
-function loadObjects(gameMap) {
+function loadObjects(gameMap, rows, cols) {
     const wallNamesMap = { x: "wall1", m: "wall2", "-": "woodBridge", "^": "trap1", "o": "fireWall", "w" :"waterWall"}
+    backgroundBuffer.width = window.innerWidth;
+    backgroundBuffer.height = window.innerHeight;
+    canvas.width = cols * tileSize;
+    canvas.height = backgroundBuffer.height;
     //load background image to buffer
     backgroundBuffer.img = graphics.getImage("background");
-    for (let row = 0; row < gameMap.length; row++) {
+    for (let row = 0; row < rows; row++) {
         for (let col = 0; col < gameMap[row].length; col++) {
             const c = gameMap[row][col];
             if (c === "p") {
@@ -42,31 +45,34 @@ function loadObjects(gameMap) {
 
 function main() {
     const map = new GameMap();
-
     const gameMap = map.getMap1();
-    loadObjects(gameMap);
+    const rows = gameMap.length;
+    const cols = gameMap[0].length;
+    loadObjects(gameMap, rows, cols);
 
     prepareKeyEvents();
+    //display sidebar
+    sideBar.style.display = 'flex';
 
     let frameDelay = 0;
     function update() {
         if (frameDelay === 0) {
             if(!player.isAlive()) return;
-            ctx.setTransform(1,0,0,1,0,0);//reset the transform matrix as it is cumulative
+            // ctx.setTransform(1,0,0,1,0,0);//reset the transform matrix as it is cumulative
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             updateLogic();
-            let myWorld = {
-                minCol: 0,
-                maxCol: 2000,
-                maxRow: 2000,
-                minRow: 0
-            } 
-            const camX = clamp(-player.col + canvas.width / 2, myWorld.minCol, myWorld.maxCol - canvas.width);
-            const camY = clamp(-player.row  + canvas.height / 2, myWorld.minRow, myWorld.maxRow - canvas.height);
+            // let myWorld = {
+            //     minCol: 0,
+            //     maxCol: 2000,
+            //     maxRow: 2000,
+            //     minRow: 0
+            // } 
+            // const camX = clamp(-player.col + canvas.width / 2, myWorld.minCol, myWorld.maxCol - canvas.width);
+            // const camY = clamp(-player.row  + canvas.height / 2, myWorld.minRow, myWorld.maxRow - canvas.height);
         
-            ctx.translate( camX, camY ); 
+            // ctx.translate( camX, camY ); 
             //redraw 
-            redraw();
+            redraw(rows, cols);
         }
         frameDelay = (frameDelay + 1) % 3;
         requestAnimationFrame(update);
@@ -80,7 +86,7 @@ function clamp(value, min, max){
 }
 
 loadGraphics(main);
-function redraw(){
+function redraw(rows, cols){
     ctx.drawImage(backgroundBuffer.img, 0, 0, backgroundBuffer.width, backgroundBuffer.height);
     tileHandler.renderAllTiles(ctx, graphics, tileSize);
     player.render(ctx, graphics.getImage(player.name), tileSize);
