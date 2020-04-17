@@ -1,3 +1,4 @@
 body {
     background-image: url("/game/img/background.png");
+    background-size: 100%;
 }
