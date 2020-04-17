@@ -6,6 +6,7 @@ import Player from "./Entity/Player.js";
 import TileHandler from "./tiles/TileHandler.js"
 
 const canvas = document.getElementById('screen');
+const sideBar = document.getElementById('sideBarForm');
 const ctx = canvas.getContext('2d');
 
 const backgroundBuffer = document.createElement('canvas');
@@ -46,25 +47,28 @@ function main() {
     const gameMap = map.getMap1();
     loadObjects(gameMap);
 
+    //display side bar
+    sideBar.style.display = 'flex';
+
     prepareKeyEvents();
 
     let frameDelay = 0;
     function update() {
         if (frameDelay === 0) {
             if(!player.isAlive()) return;
-            ctx.setTransform(1,0,0,1,0,0);//reset the transform matrix as it is cumulative
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // ctx.setTransform(1,0,0,1,0,0);//reset the transform matrix as it is cumulative
+            // ctx.clearRect(0, 0, canvas.width, canvas.height);
             updateLogic();
-            let myWorld = {
-                minCol: 0,
-                maxCol: 2000,
-                maxRow: 2000,
-                minRow: 0
-            } 
-            const camX = clamp(-player.col + canvas.width / 2, myWorld.minCol, myWorld.maxCol - canvas.width);
-            const camY = clamp(-player.row  + canvas.height / 2, myWorld.minRow, myWorld.maxRow - canvas.height);
+            // let myWorld = {
+            //     minCol: 0,
+            //     maxCol: 2000,
+            //     maxRow: 2000,
+            //     minRow: 0
+            // } 
+            // const camX = clamp(-player.col + canvas.width / 2, myWorld.minCol, myWorld.maxCol - canvas.width);
+            // const camY = clamp(-player.row  + canvas.height / 2, myWorld.minRow, myWorld.maxRow - canvas.height);
         
-            ctx.translate( camX, camY ); 
+            // ctx.translate( camX, camY ); 
             //redraw 
             redraw();
         }
