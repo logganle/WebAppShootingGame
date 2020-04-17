@@ -96,6 +96,7 @@ function updateLogic(){
 
 function prepareKeyEvents(){
     document.addEventListener('keypress', (event) => {
+        event.preventDefault();
         const key = event.code;
         if(key == 'KeyD') player.isMovingRight = true;
         else if(key == 'KeyA') player.isMovingLeft = true;
