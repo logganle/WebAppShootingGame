@@ -11,7 +11,7 @@ router.get('/dashboard', ensureAuthenticated, (req, res) =>
     user: req.user
   })
 );
-router.use('/game/', ensureAuthenticated, (req, res, next) => {
+router.use('/game/home.html', ensureAuthenticated, (req, res, next) => {
   return next();
 });
 

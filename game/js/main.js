@@ -101,6 +101,7 @@ function updateLogic(){
 function prepareKeyEvents(){
     document.addEventListener('keypress', (event) => {
         const key = event.code;
+        event.preventDefault();
         if(key == 'KeyD') player.isMovingRight = true;
         else if(key == 'KeyA') player.isMovingLeft = true;
         if(key == 'Space' && !player.isJumping){
