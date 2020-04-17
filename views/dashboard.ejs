@@ -1,7 +1,63 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= user.name %></p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
-<a href="/game/home.html" class="btn btn-secondary">Play game</a>
 <audio autoplay loop id="playAudio">
     <source src="/game/sound/background_music.mp3" type="audio/mp3" style="display: hidden;">
 </audio> 
+<link rel="stylesheet" href="/game/css/dashboard.css"/>
+
+<div id ="header">
+    <h1 class="mt-4">Dashboard</h1>
+    <p class="lead mb-3">Welcome <%= user.name %></p>
+    <a href="/users/logout" class="btn btn-secondary">Logout</a>
+    <a href="/game/home.html" class="btn btn-secondary">Play game</a>    
+</div>
+<div>
+    <table style="width:100%; margin-top:10px">
+        <tr>
+            <th colspan="2">Top scorers</th>
+          </tr>
+        <tr>
+          <th>Name</th>
+          <th>Score</th>
+        </tr>
+        <tr>
+            <td>Logan Le</td>
+            <td>4000</td>
+        </tr>
+        <tr>
+            <td>Lily Nguyen</td>
+            <td>3500</td>
+        </tr>
+        <tr>
+            <td>Alex Chen</td>
+            <td>3408</td>
+        </tr>
+        <tr>
+            <td>John Brown</td>
+            <td>3400</td>
+        </tr>
+        <tr>
+            <td>John Legend</td>
+            <td>3400</td>
+        </tr>
+
+        <tr>
+            <td>Minh Le</td>
+            <td>2500</td>
+        </tr>
+        <tr>
+            <td>Khoi Nguyen</td>
+            <td>2409</td>
+        </tr>
+        <tr>
+            <td>Alex Li</td>
+            <td>2408</td>
+        </tr>
+        <tr>
+            <td>Thalia Le</td>
+            <td>2045</td>
+        </tr>
+        <tr>
+            <td>Micheal Fred</td>
+            <td>2045</td>
+        </tr>
+      </table>
+</div>

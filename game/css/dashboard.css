@@ -1,0 +1,29 @@
+#header{
+  align-self: flex-start;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 20%;
+    border-radius:25px;
+   align-content: center;
+  }
+  
+  td, th {
+    border: 5px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    color: #F48080;
+    background-color: lightcyan;
+  }
+  /* tr:nth-child(odd) {
+    color: #F48080;
+    background-color: lightcyan;
+  } */
+  body{
+      text-align: center;
+}  
