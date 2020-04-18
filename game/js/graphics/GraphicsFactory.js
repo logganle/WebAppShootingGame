@@ -8,7 +8,7 @@ const wallsConfig = [
     {name: "background", imagePath: "./img/background.png"},
     {name: "fireWall", imagePath: "./img/fire.gif"},
     {name: "waterWall", imagePath: "./img/water.jpg"},
-    {name: "fireBall", imagePath: "./img/fireBall.png"}
+    {name: "fireBall", imagePath: "./img/fireball.png"}
 ];
 export default class GraphicsFactory {
     constructor() {
