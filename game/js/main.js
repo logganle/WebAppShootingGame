@@ -99,6 +99,7 @@ function redraw(){
 function updateLogic(){
     document.gameScore += 1;
     player.update();
+    objectHandlers.entities.forEach(e => e.update());
     objectHandlers.tiles.filter(t => t.name === "woodBridge").forEach(t => {
         t.update();
     });
