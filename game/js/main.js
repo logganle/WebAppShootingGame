@@ -3,7 +3,7 @@ import GameMap from "./mapGame/gameMap.js";
 import TileFactory from "./tiles/TileFactory.js";
 import {tileSize} from "./constants/tileConstants.js";
 import Player from "./Entity/Player.js";
-import TileHandler from "./tiles/TileHandler.js"
+import ObjectHandlers from "./tiles/ObjectHandlers.js"
 
 const canvas = document.getElementById('screen');
 const sideBar = document.getElementById('sideBarForm');
@@ -17,7 +17,7 @@ document.gameScore = 0;
 //load all images
 const graphics = new GraphicsFactory();
 const tileFactory = TileFactory.getInstance();
-const tileHandler = TileHandler.getInstance();
+const objectHandlers = ObjectHandlers.getInstance();
 function loadGraphics(main) {
     graphics.loadAllGraphics(main);
 }
@@ -35,7 +35,7 @@ function loadObjects(gameMap) {
             else if (c ==="x" || c === "m" || c === "-" || c == 'w' || c === "o"){
                 const wall = tileFactory.getTile(wallNamesMap[c], row * tileSize, col * tileSize);
                 if(c === 'w') wall.solid = false;
-                tileHandler.addTile(wall);
+                objectHandlers.addTile(wall);
             }
         }
     }
@@ -86,14 +86,14 @@ function clamp(value, min, max){
 loadGraphics(main);
 function redraw(){
     ctx.drawImage(backgroundBuffer.img, 0, 0, backgroundBuffer.width, backgroundBuffer.height);
-    tileHandler.renderAllTiles(ctx, graphics, tileSize);
+    objectHandlers.renderAllTiles(ctx, graphics, tileSize);
     player.render(ctx, graphics.getImage(player.name), tileSize);
 }
 
 function updateLogic(){
     document.gameScore += 1;
     player.update();
-    tileHandler.tiles.filter(t => t.name === "woodBridge").forEach(t => {
+    objectHandlers.tiles.filter(t => t.name === "woodBridge").forEach(t => {
         t.update();
     });
 }

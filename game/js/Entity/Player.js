@@ -1,8 +1,8 @@
 import Entity from "./Entity.js";
 import {tileSize} from "../constants/tileConstants.js";
-import TileHandler from "../tiles/TileHandler.js";
+import ObjectHandlers from "../tiles/ObjectHandlers.js";
 // import contextDebugger from "../main.js"
-const allTiles = TileHandler.getInstance().tiles;
+const allTiles = ObjectHandlers.getInstance().tiles;
 const Player = (() => {
     class PlayerInstance extends Entity {
         constructor(name, row, col, width, height, solid) {

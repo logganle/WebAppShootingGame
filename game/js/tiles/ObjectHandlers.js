@@ -1,5 +1,5 @@
-const TileHandler = (() => {
-    class TileHandlerInstance {
+const ObjectHandler = (() => {
+    class ObjectHandlerInstance {
         constructor(){
             this.tiles = [];
         }
@@ -14,7 +14,7 @@ const TileHandler = (() => {
     }
     let instance;
     function createInstance(){
-        return new TileHandlerInstance();
+        return new ObjectHandlerInstance();
     }
     return {
         getInstance : () =>{
@@ -25,4 +25,4 @@ const TileHandler = (() => {
         }
     }
 })();
-export default TileHandler;
+export default ObjectHandler;
