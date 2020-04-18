@@ -1,8 +1,11 @@
+import { tileSize } from "../constants/tileConstants.js";
+
 const ObjectHandler = (() => {
     class ObjectHandlerInstance {
         constructor(){
             this.tiles = [];
             this.entities = [];
+            this.balls = [];
         }
         addTile(t){
             this.tiles.push(t);
@@ -18,6 +21,18 @@ const ObjectHandler = (() => {
         }
         removeEntity(e){
             this.entities = this.entities.filter(entity => entity !== e);
+        }
+
+        addBall(b){
+            this.balls.push(b);
+        }
+        renderAllBalls(ctx, graphics, tileSize){
+            this.balls.forEach(b => {
+                b.render(ctx, graphics.getImage(b.name), tileSize);
+            });
+        }
+        removeBall(b){
+            this.balls = this.balls.filter(ball => b !== ball);
         }
 
         renderAllEntities(ctx, graphics, tileSize){

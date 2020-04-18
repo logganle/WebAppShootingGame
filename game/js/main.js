@@ -94,6 +94,7 @@ function redraw(){
     objectHandlers.renderAllTiles(ctx, graphics, tileSize);
     objectHandlers.renderAllEntities(ctx, graphics, tileSize);
     player.render(ctx, graphics.getImage(player.name), tileSize);
+    objectHandlers.renderAllBalls(ctx, graphics, tileSize);
 }
 
 function updateLogic(){
@@ -103,6 +104,7 @@ function updateLogic(){
     objectHandlers.tiles.filter(t => t.name === "woodBridge").forEach(t => {
         t.update();
     });
+    objectHandlers.balls.forEach(b => b.update());
 }
 
 function prepareKeyEvents(){
@@ -127,6 +129,12 @@ function prepareKeyEvents(){
                 player.isSwimmingUp = false;
             }
         }
+        if(key == 'KeyR'){
+            if(!player.isShooting){
+                player.isShooting = true;
+                player.shoot();
+            }
+        }
     });
     document.addEventListener('keyup', (event) => {
         const key = event.code;
@@ -135,6 +143,7 @@ function prepareKeyEvents(){
         // if(key == 'Space') player.isJumping = false;
         if(key == 'KeyW') player.isSwimmingUp = false;
         if(key == 'KeyS') player.isSwimmingDown = false;
+        if(key == 'KeyR') player.isShooting = false;
     });
 }
 

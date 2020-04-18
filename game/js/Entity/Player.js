@@ -1,6 +1,7 @@
 import Entity from "./Entity.js";
-import {tileSize} from "../constants/tileConstants.js";
+import {tileSize, ballSize} from "../constants/tileConstants.js";
 import ObjectHandlers from "../tiles/ObjectHandlers.js";
+import FireBall from "../magic_balls/FireBall.js"
 // import contextDebugger from "../main.js"
 const allTiles = ObjectHandlers.getInstance().tiles;
 const Player = (() => {
@@ -14,6 +15,7 @@ const Player = (() => {
             this.walkFrameDelay = 0;
             this.isSwimmingUp = false;
             this.isSwimmingDown = false;
+            this.isShooting = false;
         }
         isAlive(){
             return this.hp > 0;
@@ -44,6 +46,11 @@ const Player = (() => {
             if(this.velR < 25)
                 this.velR += this.gravity;
 
+        }
+        shoot(){
+            let newBall = new FireBall('fireBall', this.row, this.col, ballSize, ballSize);
+            newBall.velC = this.facing == 0 ? -20 : 20;
+            ObjectHandlers.getInstance().addBall(newBall);
         }
         tileColldingCheck(t){
             if(t.name === "waterWall" && !t.solid){

@@ -19,7 +19,7 @@ export default class Eagle extends Entity{
     update(){
         this.col += this.velC;
         this.row += this.velR;
-        if(this.hp < 0){
+        if(this.hp <= 0){
             this.die();
         }
         if(this.flyingUp){
@@ -83,7 +83,6 @@ export default class Eagle extends Entity{
     }
     tileCollidingChecking(t){
         if (this.intersectsTopTile(t)) {
-            this.hp -= 1000;
             this.row = t.row - this.height;
             this.flyUp();
         }

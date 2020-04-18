@@ -1,2 +1,2 @@
-const tileSize = 40;
-export {tileSize}
+const tileSize = 40, ballSize = 30;
+export {tileSize, ballSize}
