@@ -15,8 +15,9 @@ export default class GraphicsFactory {
     }
 
     loadAllGraphics(mainCallBack) {
-        this.loadEntitiesGraphics().then((playerSprite) => {
-            this.graphicMap.set("player", playerSprite);
+        this.loadEntitiesGraphics().then((sprites) => {
+            this.graphicMap.set("player", sprites[0]);
+            this.graphicMap.set("eagle", sprites[1]);
             this.loadWallImages(wallsConfig, mainCallBack);
         });
     }
@@ -39,11 +40,17 @@ export default class GraphicsFactory {
     }
     async loadEntitiesGraphics() {
         let playerSprite = [];
+        let eagleSprite = [];
         for (let i = 0; i <= 23; i++) {
             await loadImage(`./img/player${i}.png`).then(img => {
                 playerSprite.push(img);
             });
         }
-        return Promise.resolve(playerSprite);
+        for (let i = 0; i <= 7; i++) {
+            await loadImage(`./img/eagle${i}.png`).then(img => {
+                eagleSprite.push(img);
+            });
+        }
+        return Promise.all([playerSprite, eagleSprite]);
     }
 }

@@ -4,6 +4,7 @@ import TileFactory from "./tiles/TileFactory.js";
 import {tileSize} from "./constants/tileConstants.js";
 import Player from "./Entity/Player.js";
 import ObjectHandlers from "./tiles/ObjectHandlers.js"
+import Eagle from "./Entity/Eagle.js";
 
 const canvas = document.getElementById('screen');
 const sideBar = document.getElementById('sideBarForm');
@@ -36,6 +37,10 @@ function loadObjects(gameMap) {
                 const wall = tileFactory.getTile(wallNamesMap[c], row * tileSize, col * tileSize);
                 if(c === 'w') wall.solid = false;
                 objectHandlers.addTile(wall);
+            }
+            else if(c == 'e'){
+                const eagle = new Eagle("eagle", row * tileSize, col * tileSize, tileSize, tileSize, true);
+                objectHandlers.addEntity(eagle)
             }
         }
     }
@@ -87,6 +92,7 @@ loadGraphics(main);
 function redraw(){
     ctx.drawImage(backgroundBuffer.img, 0, 0, backgroundBuffer.width, backgroundBuffer.height);
     objectHandlers.renderAllTiles(ctx, graphics, tileSize);
+    objectHandlers.renderAllEntities(ctx, graphics, tileSize);
     player.render(ctx, graphics.getImage(player.name), tileSize);
 }
 

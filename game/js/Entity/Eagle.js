@@ -1,4 +1,4 @@
-import Entity from "./Entity/Entity.js";
+import Entity from "./Entity.js";
 import {tileSize} from "../constants/tileConstants.js";
 import ObjectHandlers from "../tiles/ObjectHandlers.js";
 
@@ -27,9 +27,9 @@ export default class Eagle extends Entity{
 
     render(ctx, eagleSprite, tileSize){
         if (this.facing == 0) {
-            ctx.drawImage(eagleSprite[this.frame + 4], this.col, this.row, width, height);
+            ctx.drawImage(eagleSprite[this.frame + 4], this.col, this.row, this.width, this.height);
         } else if (this.facing == 1) {
-            ctx.drawImage(eagleSprite[this.frame], this.col, this.row, width, height);
+            ctx.drawImage(eagleSprite[this.frame], this.col, this.row, this.width, this.height);
         }
     }
 }
