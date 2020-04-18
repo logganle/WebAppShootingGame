@@ -3,6 +3,7 @@ import {tileSize} from "../constants/tileConstants.js";
 import ObjectHandlers from "../tiles/ObjectHandlers.js";
 
 const allTiles = ObjectHandlers.getInstance().tiles;
+const objHandlers = ObjectHandlers.getInstance();
 export default class Eagle extends Entity{
     constructor(name, row, col, width, height, solid){
         super(name, row, col, width, height, solid);
@@ -18,7 +19,9 @@ export default class Eagle extends Entity{
     update(){
         this.col += this.velC;
         this.row += this.velR;
-
+        if(this.hp < 0){
+            this.die();
+        }
         if(this.flyingUp){
             this.flyUp();
         }
@@ -37,6 +40,9 @@ export default class Eagle extends Entity{
         this.searchingEntities();
         allTiles.forEach(t => this.tileCollidingChecking(t));
         this.updateFrame();
+    }
+    die(){
+        objHandlers.removeEntity(this);
     }
     updateFrame(){
         if (this.animate) {
@@ -77,6 +83,7 @@ export default class Eagle extends Entity{
     }
     tileCollidingChecking(t){
         if (this.intersectsTopTile(t)) {
+            this.hp -= 1000;
             this.row = t.row - this.height;
             this.flyUp();
         }

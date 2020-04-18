@@ -7,7 +7,7 @@ const ObjectHandler = (() => {
         addTile(t){
             this.tiles.push(t);
         }
-    
+
         renderAllTiles(ctx, graphics, tileSize){
             this.tiles.forEach(w => {
                 w.render(ctx, graphics.getImage(w.name), tileSize);
@@ -16,6 +16,10 @@ const ObjectHandler = (() => {
         addEntity(e){
             this.entities.push(e);
         }
+        removeEntity(e){
+            this.entities = this.entities.filter(entity => entity !== e);
+        }
+
         renderAllEntities(ctx, graphics, tileSize){
             this.entities.forEach(e => {
                 // spriteSheet = graphics.getImage(e.name);
