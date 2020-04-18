@@ -9,7 +9,7 @@ import Eagle from "./Entity/Eagle.js";
 const canvas = document.getElementById('screen');
 const sideBar = document.getElementById('sideBarForm');
 const ctx = canvas.getContext('2d');
-
+const score = document.getElementById('score');
 const backgroundBuffer = document.createElement('canvas');
 backgroundBuffer.width = tileSize * 40; //40 objects
 backgroundBuffer.height = tileSize * 40;
@@ -38,10 +38,11 @@ function loadObjects(gameMap) {
                 if(c === 'w') wall.solid = false;
                 objectHandlers.addTile(wall);
             }
-            else if(c == 'e'){
+            else if(c === 'e'){
                 const eagle = new Eagle("eagle", row * tileSize, col * tileSize, tileSize, tileSize, true);
                 objectHandlers.addEntity(eagle)
             }
+            
         }
     }
 }
@@ -61,31 +62,14 @@ function main() {
     function update() {
         if (frameDelay === 0) {
             if(!player.isAlive()) return;
-            // ctx.setTransform(1,0,0,1,0,0);//reset the transform matrix as it is cumulative
-            // ctx.clearRect(0, 0, canvas.width, canvas.height);
+            score.innerHTML = 'Score: ' + document.gameScore;
             updateLogic();
-            // let myWorld = {
-            //     minCol: 0,
-            //     maxCol: 2000,
-            //     maxRow: 2000,
-            //     minRow: 0
-            // } 
-            // const camX = clamp(-player.col + canvas.width / 2, myWorld.minCol, myWorld.maxCol - canvas.width);
-            // const camY = clamp(-player.row  + canvas.height / 2, myWorld.minRow, myWorld.maxRow - canvas.height);
-        
-            // ctx.translate( camX, camY ); 
-            //redraw 
             redraw();
         }
         frameDelay = (frameDelay + 1) % 3;
         requestAnimationFrame(update);
     }
     update();
-}
-function clamp(value, min, max){
-    if(value < min) return min;
-    else if(value > max) return max;
-    return value;
 }
 
 loadGraphics(main);
@@ -98,7 +82,6 @@ function redraw(){
 }
 
 function updateLogic(){
-    document.gameScore += 1;
     player.update();
     objectHandlers.entities.forEach(e => e.update());
     objectHandlers.tiles.filter(t => t.name === "woodBridge").forEach(t => {
@@ -129,7 +112,7 @@ function prepareKeyEvents(){
                 player.isSwimmingUp = false;
             }
         }
-        if(key == 'KeyR'){
+        if(key == 'KeyJ'){
             if(!player.isShooting){
                 player.isShooting = true;
                 player.shoot();
@@ -143,7 +126,7 @@ function prepareKeyEvents(){
         // if(key == 'Space') player.isJumping = false;
         if(key == 'KeyW') player.isSwimmingUp = false;
         if(key == 'KeyS') player.isSwimmingDown = false;
-        if(key == 'KeyR') player.isShooting = false;
+        if(key == 'KeyJ') player.isShooting = false;
     });
 }
 

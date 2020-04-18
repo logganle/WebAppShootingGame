@@ -17,6 +17,10 @@ export default class Eagle extends Entity{
         // this.followSkill
     }
     update(){
+        if(!this.isAlive()){
+            this.die();
+            return;
+        }
         this.col += this.velC;
         this.row += this.velR;
         if(this.hp <= 0){
@@ -40,6 +44,9 @@ export default class Eagle extends Entity{
         this.searchingEntities();
         allTiles.forEach(t => this.tileCollidingChecking(t));
         this.updateFrame();
+    }
+    isAlive(){
+        return this.hp > 0;
     }
     die(){
         objHandlers.removeEntity(this);

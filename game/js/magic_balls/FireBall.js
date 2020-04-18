@@ -26,9 +26,10 @@ export default class FireBall{
         if(this.intersectsTile(t)) this.die();
     }
     entityCollding(e){
-        if(e.name != 'player' && this.intersectsEntity(e)){
+        if(e.name != 'player' && this.intersectsEntity(e) && e.isAlive()){
             this.die();
             e.hp -= 1000;
+            document.gameScore += 1;
         }
     }
     die(){
