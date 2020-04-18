@@ -22,6 +22,9 @@ const ObjectHandler = (() => {
         removeEntity(e){
             this.entities = this.entities.filter(entity => entity !== e);
         }
+        getEntitySize(){
+            return this.entities.length;
+        }
 
         addBall(b){
             this.balls.push(b);
@@ -36,7 +39,7 @@ const ObjectHandler = (() => {
         }
 
         renderAllEntities(ctx, graphics, tileSize){
-            this.entities.forEach(e => {
+            this.entities.filter(e => e.hp > 0).forEach(e => {
                 // spriteSheet = graphics.getImage(e.name);
                 e.render(ctx, graphics.getImage(e.name), tileSize);
             })

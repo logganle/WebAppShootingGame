@@ -19,6 +19,7 @@ document.gameScore = 0;
 const graphics = new GraphicsFactory();
 const tileFactory = TileFactory.getInstance();
 const objectHandlers = ObjectHandlers.getInstance();
+const eagleLocators = [];
 function loadGraphics(main) {
     graphics.loadAllGraphics(main);
 }
@@ -38,9 +39,12 @@ function loadObjects(gameMap) {
                 if(c === 'w') wall.solid = false;
                 objectHandlers.addTile(wall);
             }
-            else if(c === 'e'){
-                const eagle = new Eagle("eagle", row * tileSize, col * tileSize, tileSize, tileSize, true);
-                objectHandlers.addEntity(eagle)
+            // else if(c === 'e'){
+            //     const eagle = new Eagle("eagle", row * tileSize, col * tileSize, tileSize, tileSize, true);
+            //     objectHandlers.addEntity(eagle)
+            // }
+            else if(c === 't'){
+                eagleLocators.push({row : row, col : col, tileSize: tileSize});
             }
             
         }
@@ -62,7 +66,14 @@ function main() {
     function update() {
         if (frameDelay === 0) {
             if(!player.isAlive()) return;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
             score.innerHTML = 'Score: ' + document.gameScore;
+            if(objectHandlers.getEntitySize() === 0){
+                
+                spawnEntities();
+            }
+            console.log(objectHandlers.getEntitySize());
+                
             updateLogic();
             redraw();
         }
@@ -71,7 +82,14 @@ function main() {
     }
     update();
 }
-
+function spawnEntities(){
+    eagleLocators.forEach(({row, col, tileSize}) => {
+        let copyRow = row;
+        let copyCol = col;
+        let copytileSize = tileSize;
+        objectHandlers.addEntity(new Eagle("eagle", copyRow * copytileSize, copyCol * copytileSize, copytileSize, copytileSize, true));
+    });
+}
 loadGraphics(main);
 function redraw(){
     ctx.drawImage(backgroundBuffer.img, 0, 0, backgroundBuffer.width, backgroundBuffer.height);

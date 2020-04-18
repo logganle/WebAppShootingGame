@@ -11,8 +11,20 @@ router.get('/dashboard', ensureAuthenticated, (req, res) =>
     user: req.user
   })
 );
+
+// //post dashboard
+// router.post('/dashboard', ensureAuthenticated, (req, res) => {
+//   // console.log(req)
+//   user.gameScore = req.gameScore;
+//   res.render('dashboard', {
+//     user: user
+//   })
+// });
+
 router.use('/game/home.html', ensureAuthenticated, (req, res, next) => {
   return next();
 });
+
+
 
 module.exports = router;

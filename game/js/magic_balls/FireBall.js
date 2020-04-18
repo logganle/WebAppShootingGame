@@ -1,7 +1,5 @@
 import ObjectHandlers from '../tiles/ObjectHandlers.js'
 import Rectangle2D from '../utils/Rectangle2D.js'
-const allTiles = ObjectHandlers.getInstance().tiles;
-const entities = ObjectHandlers.getInstance().entities;
 
 export default class FireBall{
     constructor(name, row, col, width, height){
@@ -19,8 +17,8 @@ export default class FireBall{
     update(){
         this.col += this.velC;
         this.row += this.velR;
-        allTiles.forEach(t => this.tileColldingCheck(t));
-        entities.forEach(e => this.entityCollding(e));
+        ObjectHandlers.getInstance().tiles.forEach(t => this.tileColldingCheck(t));
+        ObjectHandlers.getInstance().entities.forEach(e => this.entityCollding(e));
     }
     tileColldingCheck(t){
         if(this.intersectsTile(t)) this.die();

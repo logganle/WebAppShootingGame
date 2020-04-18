@@ -14,12 +14,13 @@ export default class Eagle extends Entity{
         this.flyingUp = true;
         this.flyingDown = false;
         this.isMovingLeft = true;
+        this.hp = 1000;
         // this.followSkill
     }
     update(){
         if(!this.isAlive()){
             this.die();
-            return;
+            // return;
         }
         this.col += this.velC;
         this.row += this.velR;
