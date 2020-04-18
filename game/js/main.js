@@ -105,7 +105,7 @@ function prepareKeyEvents(){
         if(key == 'KeyD') player.isMovingRight = true;
         else if(key == 'KeyA') player.isMovingLeft = true;
         if(key == 'Space' && !player.isJumping){
-            player.velR = -21;
+            player.velR = -23;
             player.isJumping = true; 
         }
         if(player.isSwimming){
