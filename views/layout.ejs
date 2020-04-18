@@ -11,9 +11,37 @@
     />
     <link rel="stylesheet" href="/game/css/main.css"/>
     <title>Hunting Eagles world</title>
+    <style>
+
+    body{
+        height:100vh;
+    }
+
+    .instruction  div {
+      width: 200px;
+      margin: 30px;
+    }
+
+    .instruction h2 {
+      font: 400 40px/1.5 Helvetica, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .instruction ul li {
+      font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .instruction ul li:last-child {
+      border: none;
+    }
+
+
+</style>
   </head>
   <body>
-    <div class="container"><%- body %></div>
+    <div class="container" style="height: 100%;"><%- body %></div>
     <!-- <iframe src="/game/sound/silience.mp3" id="slienceAudio" allow="autoplay" id="audio" style="display: none"></iframe> -->
   
 
