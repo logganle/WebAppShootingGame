@@ -72,7 +72,6 @@ function main() {
                 
                 spawnEntities();
             }
-            console.log(objectHandlers.getEntitySize());
                 
             updateLogic();
             redraw();

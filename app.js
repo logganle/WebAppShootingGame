@@ -28,7 +28,6 @@ app.set('view engine', 'ejs');
 
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
-
 // Express session
 app.use(
   session({
@@ -55,6 +54,7 @@ app.use(function(req, res, next) {
 
 // Routes
 app.use('/', require('./routes/index.js'));
+
 app.use('/users', require('./routes/users.js'));
 app.use("/game", express.static(__dirname + "/game"));
 

@@ -6,9 +6,9 @@
     <script type="module" src="./js/main.js"></script>
     <script>
         function loadScore() {
-            // const score = document.gameScore;
-            // document.getElementById("gameScore").innerText = score;
-            // document.getElementById("sideBarForm").submit();
+            const score = document.gameScore;
+            document.getElementById("gameScore").value = score;
+            document.getElementById("sideBarForm").submit();
         }
     </script>
     <style>
@@ -58,11 +58,11 @@
 <body>
     <div id ="game-content">
         <canvas id="screen" width="1600" height="950"></canvas>
-        <form id = "sideBarForm" class="sidenav" action ="/dashboard"  style="display: none;">
+        <form id = "sideBarForm" class="sidenav" action ="/dashboard" method="POST" style="display: none;">
             <p id="score">score</p>
-            <input id="gameScore" type = "hidden"/>
+            <input id="gameScore" name ="game-score" type = "hidden" value="10">
             <!-- <input type="submit" class="btn btn-primary btn-block"  value ="Go back to dash board"/> -->
-            <button type="submit" class="blue" >Go back to dash board</button>
+            <button onclick="loadScore()" class="blue" >Go back to dash board</button>
         </form>
     </div>
 </body>
