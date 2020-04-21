@@ -16,16 +16,21 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
 //post dashboard
 router.post('/dashboard', ensureAuthenticated, (req, res, next) => {
   const score = req.body['game-score'];
-  
-  User.findById(req.user.id, (err, user) => {
-    user.score = score;
-    user.save((err) => {
-      res.render('dashboard', {
-        user: user
-      })
+  if(score > req.user.score){
+    User.findById(req.user.id, (err, user) => {
+      user.score = score;
+      user.save((err) => {
+        res.render('dashboard', {
+          user: user
+        })
+      });
     });
-  });
-  
+  }
+  else{
+    res.render('dashboard', {
+      user: req.user
+    })
+  }
 });
 
 router.use('/game/home.html', ensureAuthenticated, (req, res, next) => {
