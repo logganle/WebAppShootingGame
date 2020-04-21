@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  score: {
+    type: String,
+    default: '0'
   }
 });
 

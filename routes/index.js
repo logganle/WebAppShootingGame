@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const User = require('../models/User.js')
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
 // Welcome Page
@@ -14,10 +15,17 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
 
 //post dashboard
 router.post('/dashboard', ensureAuthenticated, (req, res, next) => {
-  console.log(req.body)
-  res.render('dashboard', {
-    user: req.user
-  })
+  const score = req.body['game-score'];
+  
+  User.findById(req.user.id, (err, user) => {
+    user.score = score;
+    user.save((err) => {
+      res.render('dashboard', {
+        user: user
+      })
+    });
+  });
+  
 });
 
 router.use('/game/home.html', ensureAuthenticated, (req, res, next) => {
