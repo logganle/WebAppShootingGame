@@ -5,11 +5,12 @@ const wallsConfig = [
     {name: "wall2", imagePath: "./img/bricks_2.png"},
     {name: "wall3", imagePath: "./img/bricks_3.png"},
     {name: "woodBridge", imagePath: "./img/wood.png"},
+    {name: "fireWall", imagePath: "./img/fire.gif"},
     {name: "background", imagePath: "./img/background.png"},
     {name: "waterWall", imagePath: "./img/water.jpg"},
     {name: "fireBall", imagePath: "./img/fireball.png"}
 ];
-// {name: "fireWall", imagePath: "./img/fire.gif"},
+
 export default class GraphicsFactory {
     constructor() {
         this.graphicMap = new Map();
@@ -26,18 +27,26 @@ export default class GraphicsFactory {
     loadWallImages(wallsConfig, mainCallBack) {
         let count = 0;
         wallsConfig.forEach(wall => {
-            loadImage(wall.imagePath).then(img => {
-                this.graphicMap.set(wall.name, img);
-                count++;
-                if(count == wallsConfig.length){
-                    const fireGIF = GIF();
-                    fireGIF.load("./img/fire.gif");
+            if(wall.name === "fireWall"){
+                const fireGIF = GIF();
+                    fireGIF.load(wall.imagePath);
                     fireGIF.onload = () =>{
-                        this.graphicMap.set("fireWall",fireGIF.frames);
+                        this.graphicMap.set(wall.name, fireGIF.frames);
+                        count++;
+                        if(count == wallsConfig.length){
+                            mainCallBack();
+                        }
+                }
+            }
+            else{
+                loadImage(wall.imagePath).then(img => {
+                    this.graphicMap.set(wall.name, img);
+                    count++;
+                    if(count == wallsConfig.length){
                         mainCallBack();
                     }
-                }
-            });
+                });
+            }
         });
     }
 

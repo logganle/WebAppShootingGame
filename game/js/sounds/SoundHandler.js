@@ -13,6 +13,7 @@ const SoundHandler = (() => {
         constructor() {
             this.fireball_audio = new Audio('./sound/fireball.wav');
             this.eagle_death = new Audio('./sound/eagle_death.wav');
+            this.eagle_death.volume = 0.3;
             this.footstep = new Audio('./sound/footstep.wav');
             this.playerDie = new Audio('./sound/player_death.wav');
         }
