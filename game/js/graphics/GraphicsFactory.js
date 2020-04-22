@@ -10,6 +10,7 @@ const wallsConfig = [
     {name: "waterWall", imagePath: "./img/water.jpg"},
     {name: "fireBall", imagePath: "./img/fireball.png"}
 ];
+
 export default class GraphicsFactory {
     constructor() {
         this.graphicMap = new Map();

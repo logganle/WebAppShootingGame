@@ -5,7 +5,7 @@ import {tileSize} from "./constants/tileConstants.js";
 import Player from "./Entity/Player.js";
 import ObjectHandlers from "./tiles/ObjectHandlers.js"
 import Eagle from "./Entity/Eagle.js";
-
+import SoundHanlder from "./sounds/SoundHandler.js"
 const canvas = document.getElementById('screen');
 const sideBar = document.getElementById('sideBarForm');
 const ctx = canvas.getContext('2d');
@@ -13,6 +13,7 @@ const score = document.getElementById('score');
 const backgroundBuffer = document.createElement('canvas');
 backgroundBuffer.width = tileSize * 40; //40 objects
 backgroundBuffer.height = tileSize * 40;
+const soundHandler = SoundHanlder.getInstance();
 
 document.gameScore = 0;
 //load all images
@@ -23,6 +24,9 @@ const eagleLocators = [];
 function loadGraphics(main) {
     graphics.loadAllGraphics(main);
 }
+
+
+
 const player = Player.getInstance();
 function loadObjects(gameMap) {
     const wallNamesMap = { x: "wall1", m: "wall2", "-": "woodBridge", "^": "trap1", "o": "fireWall", "w" :"waterWall"}
@@ -131,6 +135,7 @@ function prepareKeyEvents(){
         }
         if(key == 'KeyJ'){
             if(!player.isShooting){
+                soundHandler.playerFireBallSound();
                 player.isShooting = true;
                 player.shoot();
             }
