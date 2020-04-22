@@ -1,16 +1,15 @@
 import {loadImage} from "../utils/loader.js";
-
+import GIF from "../external_api/GIF.js"
 const wallsConfig = [
     {name: "wall1", imagePath: "./img/bricks_1.png"},
     {name: "wall2", imagePath: "./img/bricks_2.png"},
     {name: "wall3", imagePath: "./img/bricks_3.png"},
     {name: "woodBridge", imagePath: "./img/wood.png"},
     {name: "background", imagePath: "./img/background.png"},
-    {name: "fireWall", imagePath: "./img/fire.gif"},
     {name: "waterWall", imagePath: "./img/water.jpg"},
     {name: "fireBall", imagePath: "./img/fireball.png"}
 ];
-
+// {name: "fireWall", imagePath: "./img/fire.gif"},
 export default class GraphicsFactory {
     constructor() {
         this.graphicMap = new Map();
@@ -31,7 +30,12 @@ export default class GraphicsFactory {
                 this.graphicMap.set(wall.name, img);
                 count++;
                 if(count == wallsConfig.length){
-                    mainCallBack();
+                    const fireGIF = GIF();
+                    fireGIF.load("./img/fire.gif");
+                    fireGIF.onload = () =>{
+                        this.graphicMap.set("fireWall",fireGIF.frames);
+                        mainCallBack();
+                    }
                 }
             });
         });
@@ -43,6 +47,7 @@ export default class GraphicsFactory {
     async loadEntitiesGraphics() {
         let playerSprite = [];
         let eagleSprite = [];
+        
         for (let i = 0; i <= 23; i++) {
             await loadImage(`./img/player${i}.png`).then(img => {
                 playerSprite.push(img);

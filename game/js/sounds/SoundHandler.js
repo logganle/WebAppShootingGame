@@ -14,11 +14,23 @@ const SoundHandler = (() => {
             this.fireball_audio = new Audio('./sound/fireball.wav');
             this.eagle_death = new Audio('./sound/eagle_death.wav');
             this.footstep = new Audio('./sound/footstep.wav');
+            this.playerDie = new Audio('./sound/player_death.wav');
         }
         playerFireBallSound(){
             this.fireball_audio.pause();
             this.fireball_audio.currentTime = 0;
             this.fireball_audio.play();
+        }
+        playPlayerDieSound(){
+            this.playerDie.play();
+        }
+        playFootStepSound(){
+            // this.footstep.pause();
+            // this.footstep.currentTime = 0;
+            this.footstep.play();
+        }
+        playEagleDeathSound(){
+            this.eagle_death.play();
         }
     }
     let instance = new Instance();

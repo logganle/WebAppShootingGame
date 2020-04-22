@@ -2,8 +2,10 @@ import Entity from "./Entity.js";
 import {tileSize, ballSize} from "../constants/tileConstants.js";
 import ObjectHandlers from "../tiles/ObjectHandlers.js";
 import FireBall from "../magic_balls/FireBall.js"
+import SoundHandler from "../sounds/SoundHandler.js"
 // import contextDebugger from "../main.js"
 const allTiles = ObjectHandlers.getInstance().tiles;
+const soundHandler = SoundHandler.getInstance();
 const Player = (() => {
     class PlayerInstance extends Entity {
         constructor(name, row, col, width, height, solid) {
@@ -66,6 +68,9 @@ const Player = (() => {
                 this.velR = 0;
                 if(t.name === "woodBridge" && this.velC === 0)
                     this.velC += t.velC;
+                if(!this.isJumping && (this.isMovingLeft || this.isMovingRight)){
+                    soundHandler.playFootStepSound();
+                }
             }
 
             if (this.intersectsBottomTile(t)) {

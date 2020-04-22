@@ -13,7 +13,10 @@ const ObjectHandler = (() => {
 
         renderAllTiles(ctx, graphics, tileSize){
             this.tiles.forEach(w => {
-                w.render(ctx, graphics.getImage(w.name), tileSize);
+                if(w.name === "fireWall")
+                    w.renderGif(ctx, graphics.getImage(w.name), tileSize);
+                else
+                    w.render(ctx, graphics.getImage(w.name), tileSize);
             })
         }
         addEntity(e){

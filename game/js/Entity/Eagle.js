@@ -1,7 +1,9 @@
 import Entity from "./Entity.js";
 import {tileSize} from "../constants/tileConstants.js";
 import ObjectHandlers from "../tiles/ObjectHandlers.js";
+import SoundHandler from "../sounds/SoundHandler.js"
 
+const soundHandler = SoundHandler.getInstance();
 const allTiles = ObjectHandlers.getInstance().tiles;
 const objHandlers = ObjectHandlers.getInstance();
 export default class Eagle extends Entity{
@@ -50,6 +52,7 @@ export default class Eagle extends Entity{
         return this.hp > 0;
     }
     die(){
+        soundHandler.playEagleDeathSound();
         objHandlers.removeEntity(this);
     }
     updateFrame(){

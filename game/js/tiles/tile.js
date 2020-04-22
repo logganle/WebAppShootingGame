@@ -8,12 +8,17 @@ export default class Tile {
         this.width = width;
         this.height = height
         this.solid = true;
+        this.frame = 0;
     }
 
     render(ctx, image, tileSize) {
         ctx.drawImage(image, this.col , this.row, this.width, this.height);
         // ctx.fillStyle = 'green';
         // ctx.fillRect(this.col + this.width - 5, this.row + 10, 5, this.height - 20);
+    }
+    renderGif(ctx, frames, tileSize){
+        this.frame = (this.frame + 1) % frames.length;
+        this.render(ctx, frames[this.frame].image, tileSize);
     }
 
     //getBoundary
