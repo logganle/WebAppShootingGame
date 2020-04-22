@@ -7,15 +7,29 @@ const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
 
 // Dashboard
-router.get('/dashboard', ensureAuthenticated, (req, res) => {
+function queryTopTenScorers(render, req, res){
+  User.find().sort({score : -1 }).limit(10)
+  .exec((err, scorers) => {
+    if(err) 
+      console.log(err);
+    render(req,res, scorers);  
+  });
+}
+function render(req, res, scorers){
   res.render('dashboard', {
-    user: req.user
+    user: req.user,
+    scorers: scorers
   })
+}
+router.get('/dashboard', ensureAuthenticated, (req, res) => {
+  queryTopTenScorers(render, req, res);
+  
 });
 
 //post dashboard
 router.post('/dashboard', ensureAuthenticated, (req, res, next) => {
   const score = req.body['game-score'];
+  
   if(score > req.user.score){
     User.findById(req.user.id, (err, user) => {
       user.score = score;

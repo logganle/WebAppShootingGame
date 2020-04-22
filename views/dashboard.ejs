@@ -7,6 +7,7 @@
     <h1 class="mt-4">Dashboard</h1>
     <p class="lead mb-3">Welcome <%= user.name %></p>
     <p class="lead mb-3">Current max score: <%= user.score %></p>
+
     <a href="/users/logout" class="btn btn-secondary">Logout</a>
     <a href="/game/home.html" class="btn btn-secondary">Play game</a>    
 </div>
@@ -19,46 +20,13 @@
           <th>Name</th>
           <th>Score</th>
         </tr>
-        <tr>
-            <td>Logan Le</td>
-            <td>4000</td>
-        </tr>
-        <tr>
-            <td>Lily Nguyen</td>
-            <td>3500</td>
-        </tr>
-        <tr>
-            <td>Alex Chen</td>
-            <td>3408</td>
-        </tr>
-        <tr>
-            <td>John Brown</td>
-            <td>3400</td>
-        </tr>
-        <tr>
-            <td>John Legend</td>
-            <td>3400</td>
-        </tr>
-
-        <tr>
-            <td>Minh Le</td>
-            <td>2500</td>
-        </tr>
-        <tr>
-            <td>Khoi Nguyen</td>
-            <td>2409</td>
-        </tr>
-        <tr>
-            <td>Alex Li</td>
-            <td>2408</td>
-        </tr>
-        <tr>
-            <td>Thalia Le</td>
-            <td>2045</td>
-        </tr>
-        <tr>
-            <td>Micheal Fred</td>
-            <td>2045</td>
-        </tr>
+        <% for (let i = 0; i < scorers.length; i++){ %>
+            <% if(scorers[i]) { %>
+                <tr>
+                    <td><%= scorers[i].name %></td>
+                    <td><%= scorers[i].score %></td>
+                </tr>
+            <% } %> 
+        <% } %>       
       </table>
 </div>
