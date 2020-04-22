@@ -20,13 +20,15 @@
           <th>Name</th>
           <th>Score</th>
         </tr>
-        <% for (let i = 0; i < scorers.length; i++){ %>
-            <% if(scorers[i]) { %>
-                <tr>
-                    <td><%= scorers[i].name %></td>
-                    <td><%= scorers[i].score %></td>
-                </tr>
+        <% if (scorers) { %>
+            <% for (let i = 0; i < scorers.length; i++){ %>
+                <% if(scorers[i]) { %>
+                    <tr>
+                        <td><%= scorers[i].name %></td>
+                        <td><%= scorers[i].score %></td>
+                    </tr>
+                <% } %> 
             <% } %> 
-        <% } %>       
+        <% } %>   
       </table>
 </div>
