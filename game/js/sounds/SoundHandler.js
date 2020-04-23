@@ -26,8 +26,6 @@ const SoundHandler = (() => {
             this.playerDie.play();
         }
         playFootStepSound(){
-            // this.footstep.pause();
-            // this.footstep.currentTime = 0;
             this.footstep.play();
         }
         playEagleDeathSound(){

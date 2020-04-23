@@ -12,8 +12,10 @@ const ctx = canvas.getContext('2d');
 const score = document.getElementById('score');
 const backgroundBuffer = document.createElement('canvas');
 backgroundBuffer.width = tileSize * 40; //40 objects
-backgroundBuffer.height = tileSize * 40;
+// backgroundBuffer.height = tileSize * 40;
+backgroundBuffer.height = 860;
 const soundHandler = SoundHanlder.getInstance();
+
 
 document.gameScore = 0;
 //load all images
@@ -78,7 +80,9 @@ function main() {
             }
                 
             updateLogic();
+
             redraw();
+
         }
         frameDelay = (frameDelay + 1) % 3;
         requestAnimationFrame(update);
@@ -97,7 +101,7 @@ loadGraphics(main);
 function redraw(){
     ctx.drawImage(backgroundBuffer.img, 0, 0, backgroundBuffer.width, backgroundBuffer.height);
     objectHandlers.renderAllTiles(ctx, graphics, tileSize);
-    objectHandlers.renderAllEntities(ctx, graphics, tileSize);
+    objectHandlers.renderAllEntities(ctx, graphics, tileSize);    
     player.render(ctx, graphics.getImage(player.name), tileSize);
     objectHandlers.renderAllBalls(ctx, graphics, tileSize);
 }

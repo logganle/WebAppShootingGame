@@ -14,18 +14,29 @@
 
     <style>
         #game-content{
-            display: flex;
-            flex-direction: row;
+            /* display: flex;
+            flex-direction: row; */
+            position: absolute;
         }
-        .sidenav {
+        #screen {
             width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        #sideBarForm {
+            position:relative;
+            width: 100%;
+            height: 8%;
+            bottom: 0;
+            opacity: 0.8;
             background-color:yellowgreen;
-            display: flex;
+             display: flex; 
             flex-direction: column;
             justify-content: center;
         }
+
         #score{
-            align-self: flex-start;
+            /* align-self: flex-start; */
             width: 100px;
         }
         .sidenav input {
@@ -41,6 +52,7 @@
             background: #4C8FFB;
             border: 1px #3079ED solid;
             box-shadow: inset 0 1px 0 #80B0FB;
+            padding: 10px;
         }
 
         button.blue:hover {
@@ -58,13 +70,14 @@
 </head>
 <body>
     <div id ="game-content">
-        <canvas id="screen" width="1600" height="950"></canvas>
+        
         <form id = "sideBarForm" class="sidenav" action ="/dashboard" method="POST" style="display: none;">
             <p id="score">score</p>
             <input id="gameScore" name ="game-score" type = "hidden" value="10">
-            <!-- <input type="submit" class="btn btn-primary btn-block"  value ="Go back to dash board"/> -->
             <button onclick="loadScore()" class="blue" >Go back to dash board</button>
         </form>
+        <canvas id="screen" width="1600" height="780"></canvas>
+        
     </div>
 </body>
 </html>
