@@ -29,18 +29,26 @@ const Player = (() => {
             if(this.animate){
                 if(!this.isSwimming){
                     if(this.walkFrameDelay == 0){
+                        soundHandler.stopSwimmingSound();
+                        soundHandler.inGame_backgrond.volume = 1;
                         this.frame = (this.frame + 1) % 3;
                     }
                     this.walkFrameDelay = (this.walkFrameDelay + 1) % 4;
                 }
                 else{
                     if(this.swimFrameDelay == 0){
+                        soundHandler.inGame_backgrond.volume = 0.2;
+                        soundHandler.playSwimmingSound();
                         this.frame = (this.frame + 1) % 5;
                     }
                     this.swimFrameDelay = (this.swimFrameDelay + 1) % 4;
                 }
             }
             this.isSwimming = false;
+            ObjectHandlers.getInstance().entities.forEach(e => {
+                this.checkEntitiesColliding(e);
+            })
+
             allTiles.forEach(t => {
                 this.tileColldingCheck(t);
             });
@@ -48,6 +56,13 @@ const Player = (() => {
             if(this.velR < 25)
                 this.velR += this.gravity;
 
+        }
+        checkEntitiesColliding(e){
+            if(e.getBoundary().intersects(this.getBoundary())){
+                soundHandler.playPlayerHurt();
+                this.hp -= 100;
+                e.die();
+            }
         }
         shoot(){
             let newBall = new FireBall('fireBall', this.row, this.col, ballSize, ballSize);

@@ -8,8 +8,17 @@ const SoundHandler = (() => {
             this.playerDie = new Audio('./sound/player_death.wav');
             this.inGame_backgrond = new Audio('./sound/inGame_background.mp3');
             this.inGame_backgrond.loop = true;
+            this.inGame_backgrond.volume = 0.5;
             this.playerDeath = new Audio('./sound/player_death.wav');
             this.playerHurt = new Audio('./sound/player_death.wav');
+            this.swimingSound = new Audio('./sound/swimming.wav');
+            this.swimingSound.loop = true;
+        }
+        playSwimmingSound(){
+            this.swimingSound.play();
+        }
+        stopSwimmingSound(){
+            this.swimingSound.pause();
         }
         playBackgroundGame(){
             this.inGame_backgrond.play();

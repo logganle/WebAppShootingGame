@@ -10,6 +10,7 @@ const canvas = document.getElementById('screen');
 const sideBar = document.getElementById('sideBarForm');
 const ctx = canvas.getContext('2d');
 const score = document.getElementById('score');
+const hp = document.getElementById('hp');
 const backgroundBuffer = document.createElement('canvas');
 backgroundBuffer.width = tileSize * 40; //40 objects
 // backgroundBuffer.height = tileSize * 40;
@@ -77,7 +78,8 @@ function main() {
             }
             ctx.clearRect(0,0,canvas.width,canvas.height);
             score.innerHTML = 'Score: ' + document.gameScore;
-            if(objectHandlers.getEntitySize() === 0){
+            hp.innerHTML = 'Hp: ' + player.hp;
+            if(objectHandlers.getEntitySize() < 3){
                 
                 spawnEntities();
             }
