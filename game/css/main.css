@@ -1,4 +1,16 @@
 body {
     background-image: url("/game/img/background.png");
-    background-size: 100%;
+    background-size: cover;
+    
+    background-position: 0px 0px;
+	/* background-repeat: repeat-x; */
+
+	animation: animatedBackground 5s linear infinite;
+}
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 0; }
+}
+.instruction ul li{
+    font-size: medium !important;
 }
