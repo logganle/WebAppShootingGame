@@ -30,8 +30,8 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
 router.post('/dashboard', ensureAuthenticated, (req, res, next) => {
   const score = req.body['game-score'];
   console.log("old score " + req.user.score)
-  console.log("new score: " + score)
-  if(score > req.user.score){
+  console.log("new score: " + score);
+  if(parseInt(score) > parseInt(req.user.score)){
     User.findById(req.user.id, (err, user) => {
       user.score = score;
       req.user.score = user.score;
