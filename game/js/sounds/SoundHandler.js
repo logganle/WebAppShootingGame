@@ -1,13 +1,3 @@
-// const soundsConfig = [
-//     {name: 'player_death' , soundPath: './sound/player_death.wav'},
-//     {name: 'eagle_death' , soundPath: './sound/eagle_death.wav'},
-//     {name: 'monster_death' , soundPath: './sound/monster_death.wav'},
-//     {name: 'footstep' , soundPath: './sound/footstep.wav'},
-//     {name: 'fireball' , soundPath: './sound/fireball.wav'},   
-// ]
-// audio.pause() // important!!!
-//                 audio.currentTime = 0
-//                 audio.play()
 const SoundHandler = (() => {
     class Instance {
         constructor() {
@@ -16,6 +6,19 @@ const SoundHandler = (() => {
             this.eagle_death.volume = 0.3;
             this.footstep = new Audio('./sound/footstep.wav');
             this.playerDie = new Audio('./sound/player_death.wav');
+            this.inGame_backgrond = new Audio('./sound/inGame_background.mp3');
+            this.inGame_backgrond.loop = true;
+            this.playerDeath = new Audio('./sound/player_death.wav');
+            this.playerHurt = new Audio('./sound/player_death.wav');
+        }
+        playBackgroundGame(){
+            this.inGame_backgrond.play();
+        }
+        playPlayerHurt(){
+            this.playerHurt.play();
+        }
+        playPlayerDeathSound(){
+            this.playerDeath.play();
         }
         playerFireBallSound(){
             this.fireball_audio.pause();

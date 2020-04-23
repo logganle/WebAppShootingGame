@@ -61,7 +61,10 @@ const Player = (() => {
                 }
                 return;
             }
-            if(t.name === "fireWall" && this.intersectsTile(t)) this.hp -= 100;
+            if(t.name === "fireWall" && this.intersectsTile(t)){
+                this.hp -= 100;
+                soundHandler.playPlayerHurt();
+            }
             if (this.intersectsTopTile(t)) {
                 this.row = t.row - this.height;
                 this.isJumping = false;

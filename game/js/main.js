@@ -27,8 +27,6 @@ function loadGraphics(main) {
     graphics.loadAllGraphics(main);
 }
 
-
-
 const player = Player.getInstance();
 function loadObjects(gameMap) {
     const wallNamesMap = { x: "wall1", m: "wall2", "-": "woodBridge", "^": "trap1", "o": "fireWall", "w" :"waterWall"}
@@ -69,9 +67,14 @@ function main() {
     prepareKeyEvents();
 
     let frameDelay = 0;
+    soundHandler.playBackgroundGame();
     function update() {
         if (frameDelay === 0) {
-            if(!player.isAlive()) return;
+            if(!player.isAlive()){
+                soundHandler.playPlayerDeathSound();
+                confirm("Oops, game is over ! go back to your dashboard")
+                return;
+            }
             ctx.clearRect(0,0,canvas.width,canvas.height);
             score.innerHTML = 'Score: ' + document.gameScore;
             if(objectHandlers.getEntitySize() === 0){
